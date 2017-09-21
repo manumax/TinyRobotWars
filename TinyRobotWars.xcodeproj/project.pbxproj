@@ -1,0 +1,750 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2AB150823B7F9BCF964D6802 /* Pods_TinyRobotWars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D121B9E1F4AF993BD003A67B /* Pods_TinyRobotWars.framework */; };
+		495C864E0BF7CF107C23E90D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B848088CE6E99950F60C0051 /* Images.xcassets */; };
+		510482C3AD4F29530E7405F5 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1298C04B7917B53B0AB90235 /* Pods_UnitTests.framework */; };
+		6217609F0581390617216538 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62176557DBB2EE255EF2D72D /* Lexer.swift */; };
+		6217683DDE162D3F998F9882 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6217639A3E71C94BF95242E0 /* EditViewController.swift */; };
+		625DF7C21E5C53C000944E83 /* Matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625DF7C11E5C53C000944E83 /* Matchers.swift */; };
+		625DF7C41E5C869E00944E83 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625DF7C31E5C869E00944E83 /* AST.swift */; };
+		625DF7C61E5C9F7900944E83 /* ParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625DF7C51E5C9F7900944E83 /* ParserSpec.swift */; };
+		62ADEA3C1E59942100CFC498 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B08DCF4EF8ABD1E94477625 /* Main.storyboard */; };
+		62ADEA3D1E59942100CFC498 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3C80343C4780DF7C9BEF960 /* LaunchScreen.xib */; };
+		62BF85B41E59FD20000982FF /* LexerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BF85B31E59FD20000982FF /* LexerSpec.swift */; };
+		B7DBA38059658CE88AFA9D69 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B9E3B1DA1EC9DC037E29E748 /* Settings.bundle */; };
+		CA7FB3155BD3ADE297498516 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7BEE7611C77EA461A1B9560 /* Foundation.framework */; };
+		E9DC2014A69B77500C04BD02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B1616557302719C4F08886 /* AppDelegate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ED7A4C2909DB7746ADEC8B2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2DCC5E6900D086235F16000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D067FD5C9EE4014E2B47DDC8;
+			remoteInfo = TinyRobotWars;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1298C04B7917B53B0AB90235 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E63ABCB6F2BE1FA3C67E3EF /* Pods-TinyRobotWars.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinyRobotWars.release.xcconfig"; path = "Pods/Target Support Files/Pods-TinyRobotWars/Pods-TinyRobotWars.release.xcconfig"; sourceTree = "<group>"; };
+		2A847411B875E822D9656C5B /* UnitTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
+		2E2C6B79AA37F81A5BCE883F /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		30A8C719BD4B00664E344478 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		30B1616557302719C4F08886 /* AppDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4B08DCF4EF8ABD1E94477625 /* Main.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		6217639A3E71C94BF95242E0 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		62176557DBB2EE255EF2D72D /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
+		6244B14CBD212C017E114340 /* Pods-TinyRobotWars.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinyRobotWars.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinyRobotWars/Pods-TinyRobotWars.debug.xcconfig"; sourceTree = "<group>"; };
+		625DF7C11E5C53C000944E83 /* Matchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matchers.swift; sourceTree = "<group>"; };
+		625DF7C31E5C869E00944E83 /* AST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
+		625DF7C51E5C9F7900944E83 /* ParserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParserSpec.swift; sourceTree = "<group>"; };
+		62BF85B31E59FD20000982FF /* LexerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LexerSpec.swift; sourceTree = "<group>"; };
+		76BBF6A9901257176B2C1D79 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B0094C603A3E395C893C9D9 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
+		B848088CE6E99950F60C0051 /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B9E3B1DA1EC9DC037E29E748 /* Settings.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		C7BEE7611C77EA461A1B9560 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D121B9E1F4AF993BD003A67B /* Pods_TinyRobotWars.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TinyRobotWars.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3C80343C4780DF7C9BEF960 /* LaunchScreen.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		F4F2842D40FEB787DB370186 /* TinyRobotWars.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyRobotWars.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F94E5ECA234BFCD0F55D97F9 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		71053C0FF6E1B37930173CEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA7FB3155BD3ADE297498516 /* Foundation.framework in Frameworks */,
+				2AB150823B7F9BCF964D6802 /* Pods_TinyRobotWars.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7548052B40345F02515AB73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				510482C3AD4F29530E7405F5 /* Pods_UnitTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00321BFADD92C8EE835A6AAE /* TinyRobotWars */ = {
+			isa = PBXGroup;
+			children = (
+				3E5A752C6F0D07EA723AF881 /* UI */,
+				47385236FB30CEE8BDE52B6D /* Resources */,
+				6217600945440D3442AA9361 /* Core */,
+			);
+			path = TinyRobotWars;
+			sourceTree = "<group>";
+		};
+		12D961EAD44D31414023E871 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4F2842D40FEB787DB370186 /* TinyRobotWars.app */,
+				30A8C719BD4B00664E344478 /* UnitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		214089C6D261D20E43932F63 /* Other-Sources */ = {
+			isa = PBXGroup;
+			children = (
+				76BBF6A9901257176B2C1D79 /* Info.plist */,
+			);
+			path = "Other-Sources";
+			sourceTree = "<group>";
+		};
+		2FF0BDD5CF0386CE36ABC5BB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2A847411B875E822D9656C5B /* UnitTests-Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3E5A752C6F0D07EA723AF881 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				30B1616557302719C4F08886 /* AppDelegate.swift */,
+				6217639A3E71C94BF95242E0 /* EditViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		4422376EAD38371E5F56A91E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1E63ABCB6F2BE1FA3C67E3EF /* Pods-TinyRobotWars.release.xcconfig */,
+				6244B14CBD212C017E114340 /* Pods-TinyRobotWars.debug.xcconfig */,
+				7B0094C603A3E395C893C9D9 /* Pods-UnitTests.release.xcconfig */,
+				2E2C6B79AA37F81A5BCE883F /* Pods-UnitTests.debug.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		47385236FB30CEE8BDE52B6D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B848088CE6E99950F60C0051 /* Images.xcassets */,
+				56D87456E57517B56B890232 /* Storyboards */,
+				54BAF8CBDF465C7CF4C17BEE /* Nibs */,
+				214089C6D261D20E43932F63 /* Other-Sources */,
+				B9E3B1DA1EC9DC037E29E748 /* Settings.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		54BAF8CBDF465C7CF4C17BEE /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				D3C80343C4780DF7C9BEF960 /* LaunchScreen.xib */,
+			);
+			path = Nibs;
+			sourceTree = "<group>";
+		};
+		56D87456E57517B56B890232 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4B08DCF4EF8ABD1E94477625 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		6217600945440D3442AA9361 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				62176557DBB2EE255EF2D72D /* Lexer.swift */,
+				625DF7C31E5C869E00944E83 /* AST.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		62BA63581E5B893600F8AF83 /* Matchers */ = {
+			isa = PBXGroup;
+			children = (
+				625DF7C11E5C53C000944E83 /* Matchers.swift */,
+			);
+			path = Matchers;
+			sourceTree = "<group>";
+		};
+		6BC22E890596C26905896AFA /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				62BA63581E5B893600F8AF83 /* Matchers */,
+				2FF0BDD5CF0386CE36ABC5BB /* Resources */,
+				9B35C09E38681ECD5A2EAAC1 /* Helpers */,
+				8D488C0FB1B36207E2391848 /* Tests */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		7CDA23B0D45CCA829C6F18CD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7DDDB445B28DC69AF6D02266 /* iOS */,
+				F94E5ECA234BFCD0F55D97F9 /* Pods.framework */,
+				D121B9E1F4AF993BD003A67B /* Pods_TinyRobotWars.framework */,
+				1298C04B7917B53B0AB90235 /* Pods_UnitTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7DDDB445B28DC69AF6D02266 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				C7BEE7611C77EA461A1B9560 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		8D488C0FB1B36207E2391848 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				625DF7C51E5C9F7900944E83 /* ParserSpec.swift */,
+				62BF85B31E59FD20000982FF /* LexerSpec.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		9B35C09E38681ECD5A2EAAC1 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B363E17CDE518FBA08513B10 = {
+			isa = PBXGroup;
+			children = (
+				00321BFADD92C8EE835A6AAE /* TinyRobotWars */,
+				6BC22E890596C26905896AFA /* UnitTests */,
+				7CDA23B0D45CCA829C6F18CD /* Frameworks */,
+				12D961EAD44D31414023E871 /* Products */,
+				4422376EAD38371E5F56A91E /* Pods */,
+			);
+			indentWidth = 4;
+			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 0;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CDD63EF01F616102469E77C8 /* UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 929498BFA1F8B3767F15E8B5 /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildPhases = (
+				5367C82C9FA3AD98095CF0EA /* [CP] Check Pods Manifest.lock */,
+				9BC7282A1DA162686F206AFE /* Sources */,
+				E7548052B40345F02515AB73 /* Frameworks */,
+				F406304836080E524CFCA2D4 /* Resources */,
+				E67D2A0D12756A87A8452FAC /* [CP] Embed Pods Frameworks */,
+				AB1655C7827E64ADB6453B72 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B18A8BBD8B2F892B38E0784D /* PBXTargetDependency */,
+			);
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = 30A8C719BD4B00664E344478 /* UnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D067FD5C9EE4014E2B47DDC8 /* TinyRobotWars */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E661134D6C4BAA281E42D7EE /* Build configuration list for PBXNativeTarget "TinyRobotWars" */;
+			buildPhases = (
+				CECEB45F5A787EDDF71A4770 /* [CP] Check Pods Manifest.lock */,
+				AEF6D5A5AEE1B6A010348F28 /* Sources */,
+				71053C0FF6E1B37930173CEA /* Frameworks */,
+				3DB23E803866C36A1CEB9AFC /* Resources */,
+				610EB3A7F4A5A2C08C8FF8CD /* Warn for TODO and FIXME comments */,
+				EA95494EFCF61D8FD1BE4E33 /* Set version number */,
+				123BC0D674EDF0A744C59B33 /* [CP] Embed Pods Frameworks */,
+				473808BD15BB553D46FC6D3D /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TinyRobotWars;
+			productName = TinyRobotWars;
+			productReference = F4F2842D40FEB787DB370186 /* TinyRobotWars.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D2DCC5E6900D086235F16000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = TRW;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = manumax;
+				TargetAttributes = {
+					CDD63EF01F616102469E77C8 = {
+						LastSwiftMigration = 0820;
+					};
+					D067FD5C9EE4014E2B47DDC8 = {
+						LastSwiftMigration = 0820;
+					};
+				};
+			};
+			buildConfigurationList = 4D888745531917888DA0FA2F /* Build configuration list for PBXProject "TinyRobotWars" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B363E17CDE518FBA08513B10;
+			productRefGroup = 12D961EAD44D31414023E871 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D067FD5C9EE4014E2B47DDC8 /* TinyRobotWars */,
+				CDD63EF01F616102469E77C8 /* UnitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3DB23E803866C36A1CEB9AFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				62ADEA3C1E59942100CFC498 /* Main.storyboard in Resources */,
+				62ADEA3D1E59942100CFC498 /* LaunchScreen.xib in Resources */,
+				495C864E0BF7CF107C23E90D /* Images.xcassets in Resources */,
+				B7DBA38059658CE88AFA9D69 /* Settings.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F406304836080E524CFCA2D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		123BC0D674EDF0A744C59B33 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TinyRobotWars/Pods-TinyRobotWars-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		473808BD15BB553D46FC6D3D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TinyRobotWars/Pods-TinyRobotWars-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5367C82C9FA3AD98095CF0EA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		610EB3A7F4A5A2C08C8FF8CD /* Warn for TODO and FIXME comments */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Warn for TODO and FIXME comments";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\nFILE_EXTENSIONS=\"swift|h|m|mm|c|cpp\"\nfind -E \"${SRCROOT}\" -ipath \"${SRCROOT}/pods\" -prune -o \\( -regex \".*\\.($FILE_EXTENSIONS)$\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"\n";
+		};
+		AB1655C7827E64ADB6453B72 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CECEB45F5A787EDDF71A4770 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E67D2A0D12756A87A8452FAC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA95494EFCF61D8FD1BE4E33 /* Set version number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Set version number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "git=$(sh /etc/profile; which git)\ngit_release_version=$(\"$git\" describe --tags --always --abbrev=0)\nnumber_of_commits=$(\"$git\" rev-list master | wc -l | tr -d ' ')\ntarget_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\n  if [ -f \"$plist\" ]; then\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $number_of_commits\" \"$plist\"\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${git_release_version#*v}\" \"$plist\"\n  fi\ndone\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9BC7282A1DA162686F206AFE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625DF7C21E5C53C000944E83 /* Matchers.swift in Sources */,
+				625DF7C61E5C9F7900944E83 /* ParserSpec.swift in Sources */,
+				62BF85B41E59FD20000982FF /* LexerSpec.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AEF6D5A5AEE1B6A010348F28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625DF7C41E5C869E00944E83 /* AST.swift in Sources */,
+				E9DC2014A69B77500C04BD02 /* AppDelegate.swift in Sources */,
+				6217683DDE162D3F998F9882 /* EditViewController.swift in Sources */,
+				6217609F0581390617216538 /* Lexer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B18A8BBD8B2F892B38E0784D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D067FD5C9EE4014E2B47DDC8 /* TinyRobotWars */;
+			targetProxy = ED7A4C2909DB7746ADEC8B2D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1966F0CEB02F287F2E819A34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B0094C603A3E395C893C9D9 /* Pods-UnitTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TinyRobotWars.app/TinyRobotWars";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				INFOPLIST_FILE = "UnitTests/Resources/UnitTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.manumax.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		578F7E6BE3320EA07C3C99A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E2C6B79AA37F81A5BCE883F /* Pods-UnitTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TinyRobotWars.app/TinyRobotWars";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				INFOPLIST_FILE = "UnitTests/Resources/UnitTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.manumax.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		612661F4B1C35FB47240F7E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E63ABCB6F2BE1FA3C67E3EF /* Pods-TinyRobotWars.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = "TinyRobotWars/Resources/Other-Sources/Info.plist";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "io.manumax.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		62B11739E79CCBD6B2A19F2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6244B14CBD212C017E114340 /* Pods-TinyRobotWars.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "TinyRobotWars/Resources/Other-Sources/Info.plist";
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.manumax.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		81B542DF47012C6AF60948EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D1390CCF178CA4CB27F30C3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_VALUE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4D888745531917888DA0FA2F /* Build configuration list for PBXProject "TinyRobotWars" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81B542DF47012C6AF60948EE /* Debug */,
+				D1390CCF178CA4CB27F30C3B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		929498BFA1F8B3767F15E8B5 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1966F0CEB02F287F2E819A34 /* Release */,
+				578F7E6BE3320EA07C3C99A1 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E661134D6C4BAA281E42D7EE /* Build configuration list for PBXNativeTarget "TinyRobotWars" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				612661F4B1C35FB47240F7E0 /* Release */,
+				62B11739E79CCBD6B2A19F2E /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D2DCC5E6900D086235F16000 /* Project object */;
+}
