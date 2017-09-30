@@ -1,2 +1,8 @@
 # TinyRobotWars
-Learn Swift doing something fun
+
+Learning Swift doing something fun.
+
+### TODO
+
+[ ] Interpreter should reset at each execution.
+

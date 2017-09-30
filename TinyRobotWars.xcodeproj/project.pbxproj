@@ -45,6 +45,7 @@
 		4B08DCF4EF8ABD1E94477625 /* Main.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		620CE7BB1F7FE56E00D29145 /* Interpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpreter.swift; sourceTree = "<group>"; };
 		620CE7BD1F7FF15800D29145 /* InterpreterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterpreterSpec.swift; sourceTree = "<group>"; };
+		620CE7BF1F80154300D29145 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		6217639A3E71C94BF95242E0 /* EditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		62176557DBB2EE255EF2D72D /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		6244B14CBD212C017E114340 /* Pods-TinyRobotWars.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TinyRobotWars.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TinyRobotWars/Pods-TinyRobotWars.debug.xcconfig"; sourceTree = "<group>"; };
@@ -142,6 +143,7 @@
 		47385236FB30CEE8BDE52B6D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				620CE7BF1F80154300D29145 /* README.md */,
 				B848088CE6E99950F60C0051 /* Images.xcassets */,
 				56D87456E57517B56B890232 /* Storyboards */,
 				54BAF8CBDF465C7CF4C17BEE /* Nibs */,
