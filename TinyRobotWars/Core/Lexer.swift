@@ -9,7 +9,8 @@ enum Token {
     case register(String)
     case number(Int)
     case op(Operator)
-    case to, `if`, goto, gosub, endsub
+//    case to, `if`, goto, gosub, endsub
+    case to
     case label(String)
     case comment(String)
 }
@@ -19,10 +20,10 @@ enum Operator: String {
     case minus = "-"
     case times = "*"
     case divide = "/"
-    case equal = "="
-    case notEqual = "#"
-    case greaterThan = ">"
-    case lessThan = "<"
+//    case equal = "="
+//    case notEqual = "#"
+//    case greaterThan = ">"
+//    case lessThan = "<"
 }
 
 let registers = ["AIM", "SHOT", "RADAR", "DAMAGE", "SPEEDX", "SPEEDY", "RANDOM", "INDEX"]
@@ -32,10 +33,10 @@ let singleCharToTokenMap: [Character: Token] = [
     "-": .op(.minus),
     "*": .op(.times),
     "/": .op(.divide),
-    "=": .op(.equal),
-    "#": .op(.notEqual),
-    ">": .op(.greaterThan),
-    "<": .op(.lessThan),
+//    "=": .op(.equal),
+//    "#": .op(.notEqual),
+//    ">": .op(.greaterThan),
+//    "<": .op(.lessThan),
 ]
 
 extension Character {
@@ -125,14 +126,14 @@ class Lexer: IteratorProtocol {
             switch str {
             case "TO":
                 return .to
-            case "IF":
-                return .if
-            case "GOTO":
-                return .goto
-            case "GOSUB":
-                return .gosub
-            case "ENDSUB":
-                return .endsub
+//            case "IF":
+//                return .if
+//            case "GOTO":
+//                return .goto
+//            case "GOSUB":
+//                return .gosub
+//            case "ENDSUB":
+//                return .endsub
             case "A"..."Z" where str.characters.count == 1: fallthrough
             case _ where registers.contains(str):
                 return .register(str)

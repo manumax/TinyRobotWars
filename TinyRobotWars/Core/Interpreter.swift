@@ -11,6 +11,8 @@ import UIKit
 // MARk:
 
 class Interpreter: NodeVisitor {
+    
+    var registers: [String: Int] = [:]
 
     func visit(node: NumberNode) -> Int {
         return node.value
@@ -29,19 +31,30 @@ class Interpreter: NodeVisitor {
     }
 
     func visit(node: BinOpNode) -> Int {
-        switch node.op {
-        case Token.op(.plus):
-            return node.left.accept(visitor: self) + node.right.accept(visitor: self)
-        case Token.op(.minus):
-            return node.left.accept(visitor: self) - node.right.accept(visitor: self)
-        case Token.op(.times):
-            return node.left.accept(visitor: self) * node.right.accept(visitor: self)
-        case Token.op(.divide):
-            return node.left.accept(visitor: self) / node.right.accept(visitor: self)
-        default:
-            // This shouldn't never happen.
+        guard case let Token.op(op) = node.op else {
+            // FIXME: throw
             return 0
         }
+        switch op {
+        case .plus:
+            return node.left.accept(visitor: self) + node.right.accept(visitor: self)
+        case .minus:
+            return node.left.accept(visitor: self) - node.right.accept(visitor: self)
+        case .times:
+            return node.left.accept(visitor: self) * node.right.accept(visitor: self)
+        case .divide:
+            return node.left.accept(visitor: self) / node.right.accept(visitor: self)
+        }
+    }
+    
+    func visit(node: ToNode) -> Int {
+        guard case let Token.register(register) = node.register else {
+            // FIXME: throw
+            return 0
+        }
+        let value = node.expr.accept(visitor: self)
+        self.registers[register] = value
+        return value
     }
 }
 

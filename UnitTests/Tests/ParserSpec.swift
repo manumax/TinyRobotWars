@@ -50,19 +50,23 @@ class ParserSpec: QuickSpec {
                 }
             }
             
-//            describe("1 + A TO A") {
-//                let lexer = Lexer(withString: "1 + A TO A")
-//                let parser = Parser(withLexer: lexer)
-//                let node: Node? = try! parser.parse()
-//                it("should return the correct tree") {
-//                    expect(node).notTo(beNil())
-//                    expect(node).to(beAKindOf(ExprNode.self))
-//                    let expr = node as! ExprNode
-//                    expect(expr.term).to(beAKindOf(NumberNode.self))
-//                    expect(expr.op).to(beAKindOf(OpNode.self))
-//                    expect(expr.expr).to(beAKindOf(RegisterNode.self))
-//                }
-//            }
+            describe("1 * 3 TO A") {
+                let lexer = Lexer(withString: "1 * 3 TO A")
+                let parser = Parser(withLexer: lexer)
+                let node: Node = try! parser.parse()
+                it("should return the correct tree") {
+                    /*
+                     Expected:
+                         `to`
+                         /   \
+                        *     A
+                      /   \
+                     1     3
+                     */
+                    let expected = ToNode(expr: BinOpNode(left: NumberNode(1), op: .op(.times), right: NumberNode(3)), register: .register("A"))
+                    expect(node.isEqualTo(other: expected)).to(beTrue())
+                }
+            }
         }
     }
 }

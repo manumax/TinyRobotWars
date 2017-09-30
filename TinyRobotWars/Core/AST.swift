@@ -11,6 +11,8 @@ import Foundation
 /**
  Grammar:
  
+ <statement> ::= <expr> | <to>
+ <to> ::= <expr> 'TO' <register>
  <expr> ::= <term> ((<plus> | <minus>) <term>)*
  <term> ::= <factor> ((<mul> | <div>) <factor>)*
  <factor> ::= (<plus> | <minus>) <factor> | <number>
@@ -20,6 +22,8 @@ import Foundation
  <minus> ::= '-'
  <mult>  ::= '*'
  <div>   ::= '/'
+ 
+ <register> ::= [A..Z] | 'AIM' | 'SHOOT' | 'RADAR' | 'DAMAGE' | 'SPEEDX' | 'SPEEDY' | 'RANDOM' | 'INDEX'
  */
 
 /**
@@ -30,7 +34,6 @@ import Foundation
  <program> ::= <statement> | <statement> <program>
 
  <statement> ::= <to> | <if> | <goto> | <gosub> | <endsub> | <label>
- <to> ::= <expr> 'TO' <register>
  <if> ::= 'IF' <expr> <cond> <expr> <goto>
  <goto> ::= 'GOTO' <label>
  <gosub> ::= 'GOSUB' <label>
@@ -45,6 +48,7 @@ protocol NodeVisitor {
     func visit(node: NumberNode) -> Int
     func visit(node: UnaryOp) -> Int
     func visit(node: BinOpNode) -> Int
+    func visit(node: ToNode) -> Int
     func visit(node: Node) -> Int
 }
 
@@ -127,6 +131,7 @@ extension UnaryOp: Equatable {
         return lhs.expr.isEqualTo(other: rhs.expr) && lop.rawValue == rop.rawValue
     }
 }
+
 extension UnaryOp: CustomStringConvertible {
     var description: String {
         if case let Token.op(op) = self.op {
@@ -171,6 +176,42 @@ extension BinOpNode: CustomStringConvertible {
     var description: String {
         if case let Token.op(op) = self.op {
             return "\(self.left) \(op.rawValue) \(self.right)"
+        }
+        return ""
+    }
+}
+
+// MARK: `TO` node
+
+class ToNode: Node {
+    let expr: Node
+    let register: Token
+    
+    init(expr: Node, register: Token) {
+        self.expr = expr
+        self.register = register
+    }
+}
+
+extension ToNode: Visitable {
+    func accept(visitor: NodeVisitor) -> Int {
+        return visitor.visit(node: self)
+    }
+}
+
+extension ToNode: Equatable {
+    public static func ==(lhs: ToNode, rhs: ToNode) -> Bool {
+        guard case let Token.register(lregister) = lhs.register, case let Token.register(rregister) = rhs.register else {
+            return false
+        }
+        return lhs.expr.isEqualTo(other: rhs.expr) && lregister == rregister
+    }
+}
+
+extension ToNode: CustomStringConvertible {
+    var description: String {
+        if case let Token.register(register) = self.register {
+            return "\(self.expr) `TO` `\(register)`"
         }
         return ""
     }
@@ -235,11 +276,8 @@ class Parser {
         // <expr> ::= <term> ((<plus> | <minus>) <term>)*
         let node = try self.term()
         
-        guard let token = self.currentToken else {
+        guard let token = self.currentToken, case let Token.op(op) = token else {
             return node
-        }
-        guard case let Token.op(op) = token else {
-            throw ParserError.unexpectedTokenError
         }
         
         switch op {
@@ -251,8 +289,24 @@ class Parser {
             return node
         }
     }
+    
+    func statement() throws -> Node {
+        let expr = try self.expr()
+        
+        guard let _ = self.currentToken else {
+            return expr
+        }
+        
+        self.eat() // FIXME: This will eat `TO`, must be verified
+      
+        guard let token = self.currentToken, case Token.register(_) = token else {
+            throw ParserError.unexpectedTokenError
+        }
+        
+        return ToNode(expr: expr, register: token)
+    }
 
     func parse() throws -> Node {
-        return try self.expr()
+        return try self.statement()
     }
 }

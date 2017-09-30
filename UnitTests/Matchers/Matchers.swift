@@ -22,12 +22,13 @@ private func tokensAreEqual(_ token1: Token, _ token2: Token) -> Bool {
         return llabel == rlabel
     case (let .comment(lcomment), let .comment(rcomment)):
         return lcomment == rcomment
-    case (.to, .to): fallthrough
-    case (.if, .if): fallthrough
-    case (.gosub, .gosub): fallthrough
-    case (.endsub, .endsub): fallthrough
-    case (.goto, .goto):
+    case (.to, .to):
         return true
+//    case (.if, .if): fallthrough
+//    case (.gosub, .gosub): fallthrough
+//    case (.endsub, .endsub): fallthrough
+//    case (.goto, .goto):
+//        return true
     default:
         return false
     }
