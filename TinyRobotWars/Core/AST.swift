@@ -41,9 +41,26 @@ import Foundation
  <register> ::= [A..Z] | 'AIM' | 'SHOOT' | 'RADAR', 'DAMAGE', 'SPEEDX', 'SPEEDY', 'RANDOM', 'INDEX's
 */
 
+protocol NodeVisitor {
+    func visit(node: NumberNode) -> Int
+    func visit(node: UnaryOp) -> Int
+    func visit(node: BinOpNode) -> Int
+    func visit(node: Node) -> Int
+}
+
+extension NodeVisitor {
+    func visit(node: Node) -> Int {
+        return node.accept(visitor: self)
+    }
+}
+
+protocol Visitable {
+    func accept(visitor: NodeVisitor) -> Int
+}
+
 // MARK: - AST
 
-protocol Node {
+protocol Node: Visitable {
     func isEqualTo(other: Node) -> Bool
 }
 
@@ -63,6 +80,12 @@ class NumberNode: Node {
     
     init(_ value: Int) {
         self.value = value
+    }
+}
+
+extension NumberNode: Visitable {
+    func accept(visitor: NodeVisitor) -> Int {
+        return visitor.visit(node: self)
     }
 }
 
@@ -87,6 +110,12 @@ class UnaryOp: Node {
     init(op: Token, expr: Node) {
         self.op = op
         self.expr = expr
+    }
+}
+
+extension UnaryOp: Visitable {
+    func accept(visitor: NodeVisitor) -> Int {
+        return visitor.visit(node: self)
     }
 }
 
@@ -118,6 +147,12 @@ class BinOpNode: Node {
         self.left = left
         self.op = op
         self.right = right
+    }
+}
+
+extension BinOpNode: Visitable {
+    func accept(visitor: NodeVisitor) -> Int {
+        return visitor.visit(node: self)
     }
 }
 
