@@ -14,7 +14,6 @@ import Nimble
 class LexerSpec: QuickSpec {
     override func spec() {
         describe("applying lexer") {
-            
             describe("1 TO A") {
                 let tokens: [Token] = Lexer(withString: "1 TO A").lex()
                 it("should return three tokens") {
@@ -43,7 +42,7 @@ class LexerSpec: QuickSpec {
             
             describe("-240 TO SPEEDX") {
                 let tokens: [Token] = Lexer(withString: "-240 TO SPEEDX").lex()
-                it("should return three tokens") {
+                it("should return four tokens") {
                     expect(tokens).to(haveCount(4))
                 }
                 it("should return have `-` as first token") {

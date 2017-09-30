@@ -17,7 +17,7 @@ class ParserSpec: QuickSpec {
             describe("1 + 2 * 4") {
                 let lexer = Lexer(withString: "1 + 2 * 4")
                 let parser = Parser(withLexer: lexer)
-                let node: Node = try! parser.parse()                
+                let node: Node = try! parser.parse()
                 it("should return the correct tree") {
                     /*
                      Expected:
@@ -28,6 +28,24 @@ class ParserSpec: QuickSpec {
                          2     4
                     */
                     let expected = BinOpNode(left: NumberNode(1), op: .op(.plus), right: BinOpNode(left: NumberNode(2), op: .op(.times), right: NumberNode(4)))
+                    expect(node.isEqualTo(other: expected)).to(beTrue())
+                }
+            }
+            
+            describe("-2 * -7") {
+                let lexer = Lexer(withString: "-2 * -7")
+                let parser = Parser(withLexer: lexer)
+                let node: Node = try! parser.parse()
+                it("should return the correct tree") {
+                    /*
+                     Expected:
+                            *
+                          /   \
+                         -     -
+                          \     \
+                           2     7
+                     */
+                    let expected = BinOpNode(left: UnaryOp(op: .op(.minus), expr: NumberNode(2)), op: .op(.times), right: UnaryOp(op: .op(.minus), expr: NumberNode(7)))
                     expect(node.isEqualTo(other: expected)).to(beTrue())
                 }
             }

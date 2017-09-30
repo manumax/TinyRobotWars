@@ -9,10 +9,11 @@
 import Foundation
 
 /**
-
+ Grammar:
+ 
  <expr> ::= <term> ((<plus> | <minus>) <term>)*
  <term> ::= <factor> ((<mul> | <div>) <factor>)*
- <factor> ::= <number> | <register>
+ <factor> ::= (<plus> | <minus>) <factor> | <number>
  
  <number> ::= ([0-9])+
  <plus>  ::= '+'
@@ -21,22 +22,24 @@ import Foundation
  <div>   ::= '/'
  */
 
-//<register> ::= [A..Z] | 'AIM' | 'SHOOT' | 'RADAR' | 'DAMAGE' | 'SPEEDX' | 'SPEEDY' | 'RANDOM' | 'INDEX'
+/**
+ Yet to implement:
 
-// <program> ::= <statement> | <statement> <program>
-// 
-// <statement> ::= <to> | <if> | <goto> | <gosub> | <endsub> | <label>
-// <to> ::= <expr> 'TO' <register>
-// <if> ::= 'IF' <expr> <cond> <expr> <goto>
-// <goto> ::= 'GOTO' <label>
-// <gosub> ::= 'GOSUB' <label>
-// <endsub> ::= 'ENDSUB'
-// <expr> ::= <term> | <term> <op> <expr>
-// <term> ::= <digit> | <register>
-//
-// <cond> ::= '=' | '#' | '<' | '>'
-// <label> ::= [A..Z]+
-// <register> ::= [A..Z] | 'AIM' | 'SHOOT' | 'RADAR', 'DAMAGE', 'SPEEDX', 'SPEEDY', 'RANDOM', 'INDEX's
+ <register> ::= [A..Z] | 'AIM' | 'SHOOT' | 'RADAR' | 'DAMAGE' | 'SPEEDX' | 'SPEEDY' | 'RANDOM' | 'INDEX'
+
+ <program> ::= <statement> | <statement> <program>
+
+ <statement> ::= <to> | <if> | <goto> | <gosub> | <endsub> | <label>
+ <to> ::= <expr> 'TO' <register>
+ <if> ::= 'IF' <expr> <cond> <expr> <goto>
+ <goto> ::= 'GOTO' <label>
+ <gosub> ::= 'GOSUB' <label>
+ <endsub> ::= 'ENDSUB'
+ <term> ::= <digit> | <register>
+ <cond> ::= '=' | '#' | '<' | '>'
+ label> ::= [A..Z]+
+ <register> ::= [A..Z] | 'AIM' | 'SHOOT' | 'RADAR', 'DAMAGE', 'SPEEDX', 'SPEEDY', 'RANDOM', 'INDEX's
+*/
 
 // MARK: - AST
 
@@ -53,7 +56,7 @@ extension Node where Self : Equatable {
     }
 }
 
-// MARK: - <number>
+// MARK: - Number
 
 class NumberNode: Node {
     let value: Int
@@ -75,7 +78,36 @@ extension NumberNode: CustomStringConvertible {
     }
 }
 
-// MARK: - <plus>, <minus>, <mult>, <div>
+// MARK: Unary Op
+
+class UnaryOp: Node {
+    let op: Token
+    let expr: Node
+    
+    init(op: Token, expr: Node) {
+        self.op = op
+        self.expr = expr
+    }
+}
+
+extension UnaryOp: Equatable {
+    public static func ==(lhs: UnaryOp, rhs: UnaryOp) -> Bool {
+        guard case let Token.op(lop) = lhs.op, case let Token.op(rop) = rhs.op else {
+            return false
+        }
+        return lhs.expr.isEqualTo(other: rhs.expr) && lop.rawValue == rop.rawValue
+    }
+}
+extension UnaryOp: CustomStringConvertible {
+    var description: String {
+        if case let Token.op(op) = self.op {
+            return "\(op.rawValue) \(self.expr)"
+        }
+        return ""
+    }
+}
+
+// MARK: - Binary Op
 
 class BinOpNode: Node {
     let left: Node
@@ -130,11 +162,22 @@ class Parser {
     }
     
     func factor() throws -> Node {
-        guard let token = self.currentToken, case let Token.number(value) = token else {
+        // <factor> ::= (<plus> | <minus>) <factor> | <number>
+        guard let token = self.currentToken else {
             throw ParserError.unexpectedTokenError
         }
-        self.eat()
-        return NumberNode(value)
+        
+        switch token {
+        case .op(.plus): fallthrough
+        case .op(.minus):
+            self.eat()
+            return UnaryOp(op: token, expr: try self.factor())
+        case .number(let value):
+            self.eat()
+            return NumberNode(value)
+        default:
+            throw ParserError.unexpectedTokenError
+        }
     }
     
     func term() throws -> Node {
@@ -155,7 +198,12 @@ class Parser {
 
     func expr() throws -> Node {
         // <expr> ::= <term> ((<plus> | <minus>) <term>)*
-        guard let node = try? self.term(), let token = self.currentToken, case let Token.op(op) = token else {
+        let node = try self.term()
+        
+        guard let token = self.currentToken else {
+            return node
+        }
+        guard case let Token.op(op) = token else {
             throw ParserError.unexpectedTokenError
         }
         
