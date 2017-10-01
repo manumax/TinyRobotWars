@@ -18,7 +18,7 @@ class Interpreter: NodeVisitor {
         return node.value
     }
 
-    func visit(node: UnaryOp) -> Int {
+    func visit(node: UnaryOpNode) -> Int {
         switch node.op {
         case Token.op(.plus):
             return node.expr.accept(visitor: self)

@@ -11,7 +11,7 @@ import Foundation
 /**
  Grammar:
  
- <statement> ::= <expr> | <to>
+ <statement> ::= <to>
  <to> ::= <expr> 'TO' <register>
  <expr> ::= <term> ((<plus> | <minus>) <term>)*
  <term> ::= <factor> ((<mul> | <div>) <factor>)*
@@ -46,7 +46,7 @@ import Foundation
 
 protocol NodeVisitor {
     func visit(node: NumberNode) -> Int
-    func visit(node: UnaryOp) -> Int
+    func visit(node: UnaryOpNode) -> Int
     func visit(node: BinOpNode) -> Int
     func visit(node: ToNode) -> Int
     func visit(node: Node) -> Int
@@ -107,7 +107,7 @@ extension NumberNode: CustomStringConvertible {
 
 // MARK: Unary Op
 
-class UnaryOp: Node {
+class UnaryOpNode: Node {
     let op: Token
     let expr: Node
     
@@ -117,14 +117,14 @@ class UnaryOp: Node {
     }
 }
 
-extension UnaryOp: Visitable {
+extension UnaryOpNode: Visitable {
     func accept(visitor: NodeVisitor) -> Int {
         return visitor.visit(node: self)
     }
 }
 
-extension UnaryOp: Equatable {
-    public static func ==(lhs: UnaryOp, rhs: UnaryOp) -> Bool {
+extension UnaryOpNode: Equatable {
+    public static func ==(lhs: UnaryOpNode, rhs: UnaryOpNode) -> Bool {
         guard case let Token.op(lop) = lhs.op, case let Token.op(rop) = rhs.op else {
             return false
         }
@@ -132,7 +132,7 @@ extension UnaryOp: Equatable {
     }
 }
 
-extension UnaryOp: CustomStringConvertible {
+extension UnaryOpNode: CustomStringConvertible {
     var description: String {
         if case let Token.op(op) = self.op {
             return "\(op.rawValue) \(self.expr)"
@@ -247,7 +247,7 @@ class Parser {
         case .op(.plus): fallthrough
         case .op(.minus):
             self.eat()
-            return UnaryOp(op: token, expr: try self.factor())
+            return UnaryOpNode(op: token, expr: try self.factor())
         case .number(let value):
             self.eat()
             return NumberNode(value)

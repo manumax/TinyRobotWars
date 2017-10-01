@@ -45,7 +45,7 @@ class ParserSpec: QuickSpec {
                           \     \
                            2     7
                      */
-                    let expected = BinOpNode(left: UnaryOp(op: .op(.minus), expr: NumberNode(2)), op: .op(.times), right: UnaryOp(op: .op(.minus), expr: NumberNode(7)))
+                    let expected = BinOpNode(left: UnaryOpNode(op: .op(.minus), expr: NumberNode(2)), op: .op(.times), right: UnaryOpNode(op: .op(.minus), expr: NumberNode(7)))
                     expect(node.isEqualTo(other: expected)).to(beTrue())
                 }
             }
