@@ -34,7 +34,7 @@ private func tokensAreEqual(_ token1: Token, _ token2: Token) -> Bool {
     }
 }
 
-public func equal(_ expectedToken: Token) -> MatcherFunc<Token> {
+public func equal(_ expectedToken: Token) -> Predicate<Token> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "equal \(expectedToken)"
         let actualToken = try! actualExpression.evaluate()
@@ -43,5 +43,5 @@ public func equal(_ expectedToken: Token) -> MatcherFunc<Token> {
             return tokensAreEqual(actual, expected)
         }
         return false
-    }
+    }.predicate
 }

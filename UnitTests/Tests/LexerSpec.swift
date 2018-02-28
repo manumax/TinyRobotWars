@@ -11,62 +11,75 @@ import Nimble
 
 @testable import TinyRobotWars
 
+class LexerSharedExamplesConfiguration: QuickConfiguration {
+    override class func configure(_ configuration: Configuration) {
+        sharedExamples("parsed string") { context in
+            it("should have the expected token") {
+                let input = context()["input"] as! String
+                let expected: [Token] = context()["expected"] as! [Token]
+                let tokens: [Token] = Lexer(withString: input).lex()
+                expect(tokens).to(equal(expected))
+            }
+        }
+    }
+}
+
 class LexerSpec: QuickSpec {
     override func spec() {
         describe("applying lexer") {
             describe("1 TO A") {
-                let tokens: [Token] = Lexer(withString: "1 TO A").lex()
-                it("should return three tokens") {
-                    expect(tokens).to(haveCount(3))
-                }
-                it("should return numer 1 as first token") {
-                    expect(tokens[0]).to(equal(.number(1)))
-                }
-                it("should return token `TO` as second token") {
-                    expect(tokens[1]).to(equal(.to))
-                }
-                it("should return register `A` as third token") {
-                    expect(tokens[2]).to(equal(.register("A")))
+                itBehavesLike("parsed string") {
+                    [
+                        "input": "1 TO A",
+                        "expected": [.number(1), .to, .register("A")] as [Token]
+                    ]
                 }
             }
             
-//            describe("0 TO SPEEDX TO SPEEDY") {
-//                let tokens: [Token] = Lexer(withString: "0 TO SPEEDX TO SPEEDY").lex()
-//                it("should return five tokens") {
-//                    expect(tokens).to(haveCount(5))
-//                }
-//                it("should return have `SPEEDY` as last token") {
-//                    expect(tokens.last!).to(equal(.register("SPEEDY")))
-//                }
-//            }
-//
-//            describe("-240 TO SPEEDX") {
-//                let tokens: [Token] = Lexer(withString: "-240 TO SPEEDX").lex()
-//                it("should return four tokens") {
-//                    expect(tokens).to(haveCount(4))
-//                }
-//                it("should return have `-` as first token") {
-//                    expect(tokens.first!).to(equal(.op(.minus)))
-//                }
-//            }
-//
-//            describe("240 + 100 TO A") {
-//                let tokens: [Token] = Lexer(withString: "240 + 100 TO A").lex()
-//                it("should return five tokens") {
-//                    expect(tokens).to(haveCount(5))
-//                }
-//                it("should return have `+` as second token") {
-//                    expect(tokens[1]).to(equal(.op(.plus)))
-//                }
-//            }
-//
-//            describe("H-X*100 TO SPEEDX") {
-//                let tokens: [Token] = Lexer(withString: "H-X*100 TO SPEEDX").lex()
-//                it("should return seven tokens") {
-//                    expect(tokens).to(haveCount(7))
-//                }
-//            }
-//
+            describe("0 TO SPEEDX TO SPEEDY") {
+                itBehavesLike("parsed string") {
+                    [
+                        "input": "0 TO SPEEDX TO SPEEDY",
+                        "expected": [.number(0), .to, .register("SPEEDX"), .to, .register("SPEEDY")] as [Token]
+                    ]
+                }
+            }
+
+            describe("-240 TO SPEEDX") {
+                itBehavesLike("parsed string") {
+                    [
+                        "input": "-240 TO SPEEDX",
+                        "expected": [.op(Operator.minus), .number(240), .to, .register("SPEEDX")] as [Token]
+                    ]
+                }
+            }
+
+            describe("240 + 100 TO A") {
+                itBehavesLike("parsed string") {
+                    [
+                        "input": "240 + 100 TO A",
+                        "expected": [.number(240), .op(Operator.plus), .number(100), .to, .register("A")] as [Token]
+                    ]
+                }
+            }
+            
+            describe("H-X*100 TO SPEEDX") {
+                itBehavesLike("parsed string") {
+                    [
+                        "input": "H-X*100 TO SPEEDX",
+                        "expected": [
+                            .register("H"),
+                            .op(Operator.minus),
+                            .register("X"),
+                            .op(Operator.times),
+                            .number(100),
+                            .to,
+                            .register("SPEEDX")
+                        ] as [Token]
+                    ]
+                }
+            }
+
 //            describe("IF DAMAGE # D GOTO MOVE") {
 //                let tokens: [Token] = Lexer(withString: "IF DAMAGE # D GOTO MOVE").lex()
 //                it("should return six tokens") {

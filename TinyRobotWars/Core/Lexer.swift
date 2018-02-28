@@ -15,6 +15,27 @@ enum Token {
     case comment(String)
 }
 
+extension Token: Equatable {
+    static func ==(lhs: Token, rhs: Token) -> Bool {
+        switch (lhs, rhs) {
+        case let (.register(l), .register(r)):
+            return l == r
+        case let (.number(l), .number(r)):
+            return l == r
+        case let (.op(l), .op(r)):
+            return l.rawValue == r.rawValue
+        case (.to, .to):
+            return true
+        case let (.label(l), .label(r)):
+            return l == r
+        case let (.comment(l), .comment(r)):
+            return l == r
+        default:
+            return false
+        }
+    }
+}
+
 enum Operator: String {
     case plus = "+"
     case minus = "-"
@@ -69,7 +90,7 @@ class Lexer: IteratorProtocol {
     }
     
     func nextChar() {
-        input.characters.formIndex(after: &index)
+        index = input.index(after: index)
     }
     
     func skipSpaces() {
@@ -81,7 +102,7 @@ class Lexer: IteratorProtocol {
     func readComment() -> String {
         var str = ""
         while let char = currentChar, !char.isEOL {
-            str.characters.append(char)
+            str.append(char)
             self.nextChar()
         }
         return str
@@ -90,7 +111,7 @@ class Lexer: IteratorProtocol {
     func readIdentifierOrNumber() -> String {
         var str = ""
         while let char = currentChar, char.isAlphanumeric {
-            str.characters.append(char)
+            str.append(char)
             self.nextChar()
         }
         return str
@@ -134,7 +155,7 @@ class Lexer: IteratorProtocol {
 //                return .gosub
 //            case "ENDSUB":
 //                return .endsub
-            case "A"..."Z" where str.characters.count == 1: fallthrough
+            case "A"..."Z" where str.count == 1: fallthrough
             case _ where registers.contains(str):
                 return .register(str)
             default:
