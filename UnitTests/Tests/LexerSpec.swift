@@ -80,78 +80,58 @@ class LexerSpec: QuickSpec {
                 }
             }
 
-//            describe("IF DAMAGE # D GOTO MOVE") {
-//                let tokens: [Token] = Lexer(withString: "IF DAMAGE # D GOTO MOVE").lex()
-//                it("should return six tokens") {
-//                    expect(tokens).to(haveCount(6))
-//                }
-//                it("should return have `if` as first token") {
-//                    expect(tokens[0]).to(equal(.if))
-//                }
-//                it("should return have op `#` as third token") {
-//                    expect(tokens[2]).to(equal(.op(.notEqual)))
-//                }
-//                it("should return have `goto` as fifth token") {
-//                    expect(tokens[4]).to(equal(.goto))
-//                }
-//                it("should return have `label` as sixth token") {
-//                    expect(tokens[5]).to(equal(.label("MOVE")))
-//                }
-//            }
-//
-//            describe("IF DAMAGE = D GOTO MOVE") {
-//                let tokens: [Token] = Lexer(withString: "IF DAMAGE = D GOTO MOVE").lex()
-//                it("should return have op `=` as third token") {
-//                    expect(tokens[2]).to(equal(.op(.equal)))
-//                }
-//            }
-//
-//            describe("IF DAMAGE > D GOTO MOVE") {
-//                let tokens: [Token] = Lexer(withString: "IF DAMAGE > D GOTO MOVE").lex()
-//                it("should return have op `>` as third token") {
-//                    expect(tokens[2]).to(equal(.op(.greaterThan)))
-//                }
-//            }
-//
-//            describe("IF DAMAGE < D GOTO MOVE") {
-//                let tokens: [Token] = Lexer(withString: "IF DAMAGE < D GOTO MOVE").lex()
-//                it("should return have op `<` as third token") {
-//                    expect(tokens[2]).to(equal(.op(.lessThan)))
-//                }
-//            }
-//
-//            describe("GOSUB MOVE") {
-//                let tokens: [Token] = Lexer(withString: "GOSUB MOVE").lex()
-//                it("should return two tokens") {
-//                    expect(tokens).to(haveCount(2))
-//                }
-//                it("should return have `gosub` as first token") {
-//                    expect(tokens[0]).to(equal(.gosub))
-//                }
-//                it("should return have `label` as second token") {
-//                    expect(tokens[1]).to(equal(.label("MOVE")))
-//                }
-//            }
-//
-//            describe("ENDSUB") {
-//                let tokens: [Token] = Lexer(withString: "ENDSUB").lex()
-//                it("should return one token") {
-//                    expect(tokens).to(haveCount(1))
-//                }
-//                it("should return have `endsub` as first token") {
-//                    expect(tokens[0]).to(equal(.endsub))
-//                }
-//            }
-//
-//            describe("DAMAGE TO D ;SAVE CURRENT DAMAGE") {
-//                let tokens: [Token] = Lexer(withString: "DAMAGE TO D;SAVE CURRENT DAMAGE").lex()
-//                it("should return one token") {
-//                    expect(tokens).to(haveCount(4))
-//                }
-//                it("should return have a `comment` as last token") {
-//                    expect(tokens.last!).to(equal(.comment("SAVE CURRENT DAMAGE")))
-//                }
-//            }
+            describe("IF DAMAGE # D GOTO MOVE") {
+                itBehavesLike("parsed string") {
+                    [
+                        "input": "IF DAMAGE # D GOTO MOVE",
+                        "expected": [
+                            .`if`,
+                            .register("DAMAGE"),
+                            .relOp(.notEqual),
+                            .register("D"),
+                            .goto,
+                            .label("MOVE")
+                            ] as [Token]
+                    ]
+                }
+            }
+            
+            describe("GOSUB MOVE") {
+                itBehavesLike("parsed string") {
+                    [
+                        "input": "GOSUB MOVE",
+                        "expected": [
+                            .gosub,
+                            .label("MOVE")
+                        ] as [Token]
+                    ]
+                }
+            }
+            
+            describe("ENDSUB") {
+                itBehavesLike("parsed string") {
+                    [
+                        "input": "ENDSUB",
+                        "expected": [
+                            .endsub
+                        ] as [Token]
+                    ]
+                }
+            }
+            
+            describe("DAMAGE TO D ;SAVE CURRENT DAMAGE") {
+                itBehavesLike("parsed string") {
+                    [
+                        "input": "DAMAGE TO D ;SAVE CURRENT DAMAGE",
+                        "expected": [
+                            .register("DAMAGE"),
+                            .to,
+                            .register("D"),
+                            .comment("SAVE CURRENT DAMAGE")
+                        ] as [Token]
+                    ]
+                }
+            }
         }
     }
 }

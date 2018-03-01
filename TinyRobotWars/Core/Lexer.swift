@@ -9,8 +9,12 @@ enum Token {
     case register(String)
     case number(Int)
     case op(Operator)
-//    case to, `if`, goto, gosub, endsub
+    case relOp(RelationalOperator)
     case to
+    case `if`
+    case goto
+    case gosub
+    case endsub
     case label(String)
     case comment(String)
 }
@@ -24,7 +28,17 @@ extension Token: Equatable {
             return l == r
         case let (.op(l), .op(r)):
             return l.rawValue == r.rawValue
+        case let (.relOp(l), .relOp(r)):
+            return l.rawValue == r.rawValue
         case (.to, .to):
+            return true
+        case (.`if`, .`if`):
+            return true
+        case (.goto, .goto):
+            return true
+        case (.gosub, .gosub):
+            return true
+        case (.endsub, .endsub):
             return true
         case let (.label(l), .label(r)):
             return l == r
@@ -41,10 +55,13 @@ enum Operator: String {
     case minus = "-"
     case times = "*"
     case divide = "/"
-//    case equal = "="
-//    case notEqual = "#"
-//    case greaterThan = ">"
-//    case lessThan = "<"
+}
+
+enum RelationalOperator: String {
+    case equal = "="
+    case notEqual = "#"
+    case greaterThan = ">"
+    case lessThan = "<"
 }
 
 let registers = ["AIM", "SHOT", "RADAR", "DAMAGE", "SPEEDX", "SPEEDY", "RANDOM", "INDEX"]
@@ -54,10 +71,10 @@ let singleCharToTokenMap: [Character: Token] = [
     "-": .op(.minus),
     "*": .op(.times),
     "/": .op(.divide),
-//    "=": .op(.equal),
-//    "#": .op(.notEqual),
-//    ">": .op(.greaterThan),
-//    "<": .op(.lessThan),
+    "=": .relOp(.equal),
+    "#": .relOp(.notEqual),
+    ">": .relOp(.greaterThan),
+    "<": .relOp(.lessThan),
 ]
 
 extension Character {
@@ -147,14 +164,14 @@ class Lexer: IteratorProtocol {
             switch str {
             case "TO":
                 return .to
-//            case "IF":
-//                return .if
-//            case "GOTO":
-//                return .goto
-//            case "GOSUB":
-//                return .gosub
-//            case "ENDSUB":
-//                return .endsub
+            case "IF":
+                return .if
+            case "GOTO":
+                return .goto
+            case "GOSUB":
+                return .gosub
+            case "ENDSUB":
+                return .endsub
             case "A"..."Z" where str.count == 1: fallthrough
             case _ where registers.contains(str):
                 return .register(str)
