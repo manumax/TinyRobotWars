@@ -91,7 +91,7 @@ class LexerSpec: QuickSpec {
                             .register("D"),
                             .goto,
                             .label("MOVE")
-                            ] as [Token]
+                        ] as [Token]
                     ]
                 }
             }
@@ -100,10 +100,7 @@ class LexerSpec: QuickSpec {
                 itBehavesLike("parsed string") {
                     [
                         "input": "GOSUB MOVE",
-                        "expected": [
-                            .gosub,
-                            .label("MOVE")
-                        ] as [Token]
+                        "expected": [.gosub, .label("MOVE")] as [Token]
                     ]
                 }
             }
@@ -112,9 +109,7 @@ class LexerSpec: QuickSpec {
                 itBehavesLike("parsed string") {
                     [
                         "input": "ENDSUB",
-                        "expected": [
-                            .endsub
-                        ] as [Token]
+                        "expected": [.endsub] as [Token]
                     ]
                 }
             }

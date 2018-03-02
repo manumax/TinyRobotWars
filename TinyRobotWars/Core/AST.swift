@@ -12,8 +12,8 @@ import Foundation
  Grammar:
  
  <statement> ::= <to>
- <to> ::= <expr> 'TO' <register>
- <expr> ::= <term> ((<plus> | <minus>) <term>)*
+ <to> ::= <expr> ('TO' <register>)+
+ <expr> ::= <term> ((<plus> | <minus>) <expr>)*
  <term> ::= <factor> ((<mul> | <div>) <factor>)*
  <factor> ::= (<plus> | <minus>) <factor> | <number>
  
@@ -25,24 +25,6 @@ import Foundation
  
  <register> ::= [A..Z] | 'AIM' | 'SHOOT' | 'RADAR' | 'DAMAGE' | 'SPEEDX' | 'SPEEDY' | 'RANDOM' | 'INDEX'
  */
-
-/**
- Yet to implement:
-
- <register> ::= [A..Z] | 'AIM' | 'SHOOT' | 'RADAR' | 'DAMAGE' | 'SPEEDX' | 'SPEEDY' | 'RANDOM' | 'INDEX'
-
- <program> ::= <statement> | <statement> <program>
-
- <statement> ::= <to> | <if> | <goto> | <gosub> | <endsub> | <label>
- <if> ::= 'IF' <expr> <cond> <expr> <goto>
- <goto> ::= 'GOTO' <label>
- <gosub> ::= 'GOSUB' <label>
- <endsub> ::= 'ENDSUB'
- <term> ::= <digit> | <register>
- <cond> ::= '=' | '#' | '<' | '>'
- label> ::= [A..Z]+
- <register> ::= [A..Z] | 'AIM' | 'SHOOT' | 'RADAR', 'DAMAGE', 'SPEEDX', 'SPEEDY', 'RANDOM', 'INDEX's
-*/
 
 protocol NodeVisitor {
     func visit(node: NumberNode) -> Int
@@ -185,11 +167,11 @@ extension BinOpNode: CustomStringConvertible {
 
 class ToNode: Node {
     let expr: Node
-    let register: Token
+    let registers: [Token]
     
-    init(expr: Node, register: Token) {
+    init(expr: Node, registers: [Token]) {
         self.expr = expr
-        self.register = register
+        self.registers = registers
     }
 }
 
@@ -201,19 +183,17 @@ extension ToNode: Visitable {
 
 extension ToNode: Equatable {
     public static func ==(lhs: ToNode, rhs: ToNode) -> Bool {
-        guard case let Token.register(lregister) = lhs.register, case let Token.register(rregister) = rhs.register else {
-            return false
-        }
-        return lhs.expr.isEqualTo(other: rhs.expr) && lregister == rregister
+        return lhs.registers == rhs.registers && lhs.expr.isEqualTo(other: rhs.expr)
     }
 }
 
 extension ToNode: CustomStringConvertible {
     var description: String {
-        if case let Token.register(register) = self.register {
-            return "\(self.expr) `TO` `\(register)`"
+        var desc = "\(self.expr)"
+        for register in registers {
+            desc += " TO \(register)"
         }
-        return ""
+        return desc
     }
 }
 
@@ -258,8 +238,10 @@ class Parser {
     
     func term() throws -> Node {
         // <term> ::= <factor> ((<mul> | <div>) <factor>)*
-        guard let node = try? self.factor(), let token = self.currentToken, case let Token.op(op) = token else {
-            throw ParserError.unexpectedTokenError
+        let node = try self.factor()
+        
+        guard let token = self.currentToken, case let Token.op(op) = token else {
+            return node
         }
         
         switch op {
@@ -284,26 +266,34 @@ class Parser {
         case .plus: fallthrough
         case .minus:
             self.eat()
-            return BinOpNode(left: node, op: token, right: try self.term())
+            return BinOpNode(left: node, op: token, right: try self.expr())
         default:
             return node
         }
     }
     
     func statement() throws -> Node {
+        return try to()
+    }
+    
+    func to() throws -> Node {
         let expr = try self.expr()
         
-        guard let _ = self.currentToken else {
+        var registers = [Token]()
+        while let token = self.currentToken, case .to = token {
+            self.eat()
+            if let token = self.currentToken, case .register(_) = token {
+                self.eat()
+                registers.append(token)
+            } else {
+                throw ParserError.unexpectedTokenError
+            }
+        }
+        
+        if registers.count == 0 {
             return expr
-        }
-        
-        self.eat() // FIXME: This will eat `TO`, must be verified
-      
-        guard let token = self.currentToken, case Token.register(_) = token else {
-            throw ParserError.unexpectedTokenError
-        }
-        
-        return ToNode(expr: expr, register: token)
+        }        
+        return ToNode(expr: expr, registers: registers)
     }
 
     func parse() throws -> Node {

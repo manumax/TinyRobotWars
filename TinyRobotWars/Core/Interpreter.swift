@@ -48,12 +48,12 @@ class Interpreter: NodeVisitor {
     }
     
     func visit(node: ToNode) -> Int {
-        guard case let Token.register(register) = node.register else {
-            // FIXME: throw
-            return 0
-        }
         let value = node.expr.accept(visitor: self)
-        self.registers[register] = value
+        for register in node.registers {
+            if case let .register(key) = register {
+                self.registers[key] = value
+            }
+        }
         return value
     }
 }
