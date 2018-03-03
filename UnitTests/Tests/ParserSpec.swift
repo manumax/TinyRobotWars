@@ -27,8 +27,16 @@ class ParserSpec: QuickSpec {
                           /   \
                          2     4
                     */
-                    let expected = BinOpNode(left: NumberNode(1), op: .op(.plus), right: BinOpNode(left: NumberNode(2), op: .op(.times), right: NumberNode(4)))
-                    expect(node.isEqualTo(other: expected)).to(beTrue())
+                    let expected = Node.binaryOp(
+                        .plus,
+                        .number(1),
+                        .binaryOp(
+                            .times,
+                            .number(2),
+                            .number(4)
+                        )
+                    )
+                    expect(node).to(equal(expected))
                 }
             }
             
@@ -47,24 +55,23 @@ class ParserSpec: QuickSpec {
                               /   \
                              3     4
                      */
-                    let expected = BinOpNode(
-                        left: NumberNode(1),
-                        op: .op(.plus),
-                        right: BinOpNode(
-                            left: NumberNode(2),
-                            op: .op(.plus),
-                            right: BinOpNode(
-                                left: NumberNode(3),
-                                op: .op(.minus),
-                                right: NumberNode(4)
+                    let expected = Node.binaryOp(
+                        .plus,
+                        .number(1),
+                        .binaryOp(
+                            .plus,
+                            .number(2),
+                            .binaryOp(
+                                .minus,
+                                .number(3),
+                                .number(4)
                             )
                         )
                     )
-                    expect(node.isEqualTo(other: expected)).to(beTrue())
+                    expect(node).to(equal(expected))
                 }
             }
 
-            
             describe("-2 * -7") {
                 let lexer = Lexer(withString: "-2 * -7")
                 let parser = Parser(withLexer: lexer)
@@ -78,11 +85,15 @@ class ParserSpec: QuickSpec {
                           \     \
                            2     7
                      */
-                    let expected = BinOpNode(left: UnaryOpNode(op: .op(.minus), expr: NumberNode(2)), op: .op(.times), right: UnaryOpNode(op: .op(.minus), expr: NumberNode(7)))
-                    expect(node.isEqualTo(other: expected)).to(beTrue())
+                    let expected = Node.binaryOp(
+                        .times,
+                        .unaryOp(.minus, .number(2)),
+                        .unaryOp(.minus, .number(7))
+                    )
+                    expect(node).to(equal(expected))
                 }
             }
-            
+
             describe("1 * 3 TO A") {
                 let lexer = Lexer(withString: "1 * 3 TO A")
                 let parser = Parser(withLexer: lexer)
@@ -96,18 +107,18 @@ class ParserSpec: QuickSpec {
                       /   \
                      1     3
                      */
-                    let expected = ToNode(
-                        expr: BinOpNode(
-                            left: NumberNode(1),
-                            op: .op(.times),
-                            right: NumberNode(3)
+                    let expected = Node.to(
+                        .binaryOp(
+                            .times,
+                            .number(1),
+                            .number(3)
                         ),
-                        registers: ["A"]
+                        [ .register("A") ]
                     )
-                    expect(node.isEqualTo(other: expected)).to(beTrue())
+                    expect(node).to(equal(expected))
                 }
             }
-            
+
             describe("0 TO SPEEDX TO SPEEDY") {
                 let lexer = Lexer(withString: "0 TO SPEEDX TO SPEEDY")
                 let parser = Parser(withLexer: lexer)
@@ -119,14 +130,11 @@ class ParserSpec: QuickSpec {
                          /    \
                        `0`  [SPEEDX, SPEEDY]
                      */
-                    let expected = ToNode(
-                        expr: NumberNode(0),
-                        registers: ["SPEEDX", "SPEEDY"]
-                    )
-                    expect(node.isEqualTo(other: expected)).to(beTrue())
+                    let expected = Node.to(.number(0), [ .register("SPEEDX"), .register("SPEEDY") ])
+                    expect(node).to(equal(expected))
                 }
             }
-            
+
             describe("H-X*100 TO SPEEDX") {
                 let lexer = Lexer(withString: "H-X*100 TO SPEEDX")
                 let parser = Parser(withLexer: lexer)
@@ -142,19 +150,19 @@ class ParserSpec: QuickSpec {
                          /   \
                         X    100
                      */
-                    let expected = ToNode(
-                        expr: BinOpNode(
-                            left: RegisterNode("H"),
-                            op: .op(.minus),
-                            right: BinOpNode(
-                                left: RegisterNode("X"),
-                                op: .op(.times),
-                                right: NumberNode(100)
+                    let expected = Node.to(
+                        .binaryOp(
+                            .minus,
+                            .register("H"),
+                            .binaryOp(
+                                .times,
+                                .register("X"),
+                                .number(100)
                             )
                         ),
-                        registers: ["SPEEDX"]
+                        [ .register("SPEEDX") ]
                     )
-                    expect(node.isEqualTo(other: expected)).to(beTrue())
+                    expect(node).to(equal(expected))
                 }
             }
         }
