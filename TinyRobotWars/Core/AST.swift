@@ -15,7 +15,7 @@ import Foundation
  <to> ::= <expr> ('TO' <register>)+
  <expr> ::= <term> ((<plus> | <minus>) <expr>)*
  <term> ::= <factor> ((<mul> | <div>) <factor>)*
- <factor> ::= (<plus> | <minus>) <factor> | <number>
+ <factor> ::= (<plus> | <minus>) <factor> | <register> | <number>
  
  <number> ::= ([0-9])+
  <plus>  ::= '+'
@@ -63,7 +63,6 @@ extension Node where Self : Equatable {
 
 class NumberNode: Node {
     let value: Int
-    
     init(_ value: Int) {
         self.value = value
     }
@@ -84,6 +83,31 @@ extension NumberNode: Equatable {
 extension NumberNode: CustomStringConvertible {
     var description: String {
         return "\(value)"
+    }
+}
+
+class RegisterNode: Node {
+    let name: String
+    init(_ name: String) {
+        self.name = name
+    }
+}
+
+extension RegisterNode: Visitable {
+    func accept(visitor: NodeVisitor) -> Int {
+        return visitor.visit(node: self)
+    }
+}
+
+extension RegisterNode: Equatable {
+    public static func ==(lhs: RegisterNode, rhs: RegisterNode) -> Bool {
+        return lhs.name == rhs.name
+    }
+}
+
+extension RegisterNode: CustomStringConvertible {
+    var description: String {
+        return "r:\(name)"
     }
 }
 
@@ -231,6 +255,9 @@ class Parser {
         case .number(let value):
             self.eat()
             return NumberNode(value)
+        case .register(let name):
+            self.eat()
+            return RegisterNode(name)
         default:
             throw ParserError.unexpectedTokenError
         }

@@ -126,6 +126,41 @@ class ParserSpec: QuickSpec {
                     expect(node.isEqualTo(other: expected)).to(beTrue())
                 }
             }
+            
+            describe("H-X*100 TO SPEEDX") {
+                let lexer = Lexer(withString: "H-X*100 TO SPEEDX")
+                let parser = Parser(withLexer: lexer)
+                let node: Node = try! parser.parse()
+                it("should return the correct tree") {
+                    /*
+                     Expected:
+                           `to`
+                         /      \
+                        -     SPEEDX
+                      /   \
+                     H     *
+                         /   \
+                        X    100
+                     */
+                    let expected = ToNode(
+                        expr: BinOpNode(
+                            left: RegisterNode("H"),
+                            op: .op(.minus),
+                            right: BinOpNode(
+                                left: RegisterNode("X"),
+                                op: .op(.times),
+                                right: NumberNode(100)
+                            )
+                        ),
+                        registers: [.register("SPEEDX")]
+                    )
+                    expect(node.isEqualTo(other: expected)).to(beTrue())
+                }
+            }
+            
+            
+//            "H-X*100 TO SPEEDX"
+            
         }
     }
 }
