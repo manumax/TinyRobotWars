@@ -102,7 +102,7 @@ class ParserSpec: QuickSpec {
                             op: .op(.times),
                             right: NumberNode(3)
                         ),
-                        registers: [.register("A")]
+                        registers: ["A"]
                     )
                     expect(node.isEqualTo(other: expected)).to(beTrue())
                 }
@@ -121,7 +121,7 @@ class ParserSpec: QuickSpec {
                      */
                     let expected = ToNode(
                         expr: NumberNode(0),
-                        registers: [.register("SPEEDX"), .register("SPEEDY")]
+                        registers: ["SPEEDX", "SPEEDY"]
                     )
                     expect(node.isEqualTo(other: expected)).to(beTrue())
                 }
@@ -152,15 +152,11 @@ class ParserSpec: QuickSpec {
                                 right: NumberNode(100)
                             )
                         ),
-                        registers: [.register("SPEEDX")]
+                        registers: ["SPEEDX"]
                     )
                     expect(node.isEqualTo(other: expected)).to(beTrue())
                 }
             }
-            
-            
-//            "H-X*100 TO SPEEDX"
-            
         }
     }
 }

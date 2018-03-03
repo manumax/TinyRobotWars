@@ -49,10 +49,8 @@ class Interpreter: NodeVisitor {
     
     func visit(node: ToNode) -> Int {
         let value = node.expr.accept(visitor: self)
-        for register in node.registers {
-            if case let .register(key) = register {
-                self.registers[key] = value
-            }
+        for key in node.registers {
+            self.registers[key] = value
         }
         return value
     }

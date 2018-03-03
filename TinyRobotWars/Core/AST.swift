@@ -191,9 +191,9 @@ extension BinOpNode: CustomStringConvertible {
 
 class ToNode: Node {
     let expr: Node
-    let registers: [Token]
+    let registers: [String]
     
-    init(expr: Node, registers: [Token]) {
+    init(expr: Node, registers: [String]) {
         self.expr = expr
         self.registers = registers
     }
@@ -306,12 +306,12 @@ class Parser {
     func to() throws -> Node {
         let expr = try self.expr()
         
-        var registers = [Token]()
+        var registers = [String]()
         while let token = self.currentToken, case .to = token {
             self.eat()
-            if let token = self.currentToken, case .register(_) = token {
+            if let token = self.currentToken, case let .register(name) = token {
                 self.eat()
-                registers.append(token)
+                registers.append(name)
             } else {
                 throw ParserError.unexpectedTokenError
             }
